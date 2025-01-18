@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobService {
@@ -21,21 +22,21 @@ public class JobService {
     }
 
     public void addJob(JobPost job){
-        jobRepository.addJobPost(job);
+        jobRepository.save(job);
     }
     public List<JobPost> getAllJob(){
-        return jobRepository.returnAllJobPosts();
+        return jobRepository.findAll();
     }
 
-    public JobPost getAJob(int postId){
-        return jobRepository.getAJob(postId);
+    public Optional<JobPost> getAJob(int postId){
+        return jobRepository.findById(postId);
     }
 
     public void updateJob(JobPost jobPost) {
-        jobRepository.updateJob(jobPost);
+        jobRepository.save(jobPost);
     }
 
     public void deleteJob(JobPost jobPost) {
-        jobRepository.deleteJob(jobPost);
+        jobRepository.delete(jobPost);
     }
 }

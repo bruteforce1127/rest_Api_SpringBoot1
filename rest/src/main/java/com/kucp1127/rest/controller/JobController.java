@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class JobController {
@@ -18,12 +19,9 @@ public class JobController {
     }
 
     @GetMapping("jobPost/{postId}")
-    public JobPost getAJob(@PathVariable int postId){
-        List<JobPost> jobs = job.getAllJob();
-        for(JobPost j : jobs){
-            if(j.getPostId() == postId) return j;
-        }
-        return null;
+    public Optional<JobPost> getAJob(@PathVariable int postId){
+        Optional<JobPost> j = job.getAJob(postId);
+        return j;
     }
 
     @PostMapping("jobPosts")
